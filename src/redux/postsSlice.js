@@ -28,12 +28,12 @@ const postSlice = createSlice({
   initialState,
   reducers: {
     createPost: {
-      reducer(state, action) {
+      reducer: (state, action) => {
         console.log("first", current(state));
         state.push(action.payload);
         console.log("second", current(state));
       },
-      prepare({ title, content, userId }) {
+      prepare: ({ title, content, userId }) => {
         return {
           payload: {
             id: nanoid(),
