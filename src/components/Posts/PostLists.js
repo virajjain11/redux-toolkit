@@ -1,6 +1,7 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import { allPosts } from "../../redux/postsSlice";
+import CreatePosts from "./createPosts/CreatePosts";
 
 const PostLists = () => {
   const posts = useSelector(allPosts);
@@ -17,6 +18,7 @@ const PostLists = () => {
   return (
     <section>
       <h3>Posts</h3>
+      <CreatePosts />
       {Posts}
     </section>
   );
