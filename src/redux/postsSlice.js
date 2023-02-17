@@ -1,4 +1,4 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, current, nanoid } from "@reduxjs/toolkit";
 // import { sub } from "date-fns";
 
 const initialState = [
@@ -33,11 +33,24 @@ const postSlice = createSlice({
   name: "posts",
   initialState,
   reducers: {
-    postAdded: (state, action) => {
-      state.push(action.payload);
+    createPost: {
+      reducer(state, action) {
+        console.log("first", current(state));
+        state.push(action.payload);
+        console.log("second", current(state));
+      },
+      prepare({ title, content }) {
+        return {
+          payload: {
+            id: nanoid(),
+            title,
+            content,
+          },
+        };
+      },
     },
   },
 });
-export const { postAdded } = postSlice.actions;
+export const { createPost } = postSlice.actions;
 export const allPosts = (state) => state.posts;
 export default postSlice.reducer;
