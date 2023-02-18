@@ -1,37 +1,44 @@
-import React from "react";
-import { useSelector } from "react-redux";
-import { allPosts } from "../../redux/postsSlice";
-import PostAuthor from "./Author/PostAuthor";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  allPosts,
+  fetchPosts,
+  postStatus,
+  error,
+} from "../../redux/postsSlice";
+import AllPosts from "./AllPosts/AllPosts";
 import CreatePosts from "./createPosts/CreatePosts";
-import PostReactions from "./Reactions/PostReactions";
-import PostTime from "./TimeStamp/PostTime";
 
 const PostLists = () => {
-  const posts = useSelector(allPosts);
-  const orderedPosts = posts
-    .slice()
-    .sort((a, b) => b.date.localeCompare(a.date));
+  const dispatch = useDispatch();
 
-  const Posts = orderedPosts?.map((post) => {
-    return (
-      <>
-        <article key={post.id}>
-          <h3>{post.title}</h3>
-          <p>{post.content.substring(0, 100)}</p>
-          <p className="postCredit">
-            <PostAuthor userId={post.userId} />
-            <PostTime timestamp={post.date} />
-            <PostReactions post={post} />
-          </p>
-        </article>
-      </>
-    );
-  });
+  const posts = useSelector(allPosts);
+  const status = useSelector(postStatus);
+  const errorStatus = useSelector(error);
+
+  useEffect(() => {
+    if (status === "idle") dispatch(fetchPosts());
+  }, [status]);
+
+  // if (status === "loading") return <p>Loading...</p>;
+  // if (status === "failed" && errorStatus) return <p>{errorStatus}</p>;
+
+  let content;
+  if (status === "loading") content = <p>Loading...</p>;
+  else if (status === "failed" && errorStatus) content = <p>{errorStatus}</p>;
+  else {
+    const orderedPosts = posts
+      .slice()
+      .sort((a, b) => b.date.localeCompare(a.date));
+    content = orderedPosts?.map((post) => (
+      <AllPosts post={post} key={post.id} />
+    ));
+  }
   return (
     <section>
       <h3>Posts</h3>
       <CreatePosts />
-      {Posts}
+      {content}
     </section>
   );
 };
