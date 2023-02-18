@@ -20,9 +20,6 @@ const PostLists = () => {
     if (status === "idle") dispatch(fetchPosts());
   }, [status]);
 
-  // if (status === "loading") return <p>Loading...</p>;
-  // if (status === "failed" && errorStatus) return <p>{errorStatus}</p>;
-
   let content;
   if (status === "loading") content = <p>Loading...</p>;
   else if (status === "failed" && errorStatus) content = <p>{errorStatus}</p>;
