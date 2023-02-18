@@ -1,7 +1,8 @@
 import { nanoid } from "@reduxjs/toolkit";
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { addNewPost, createPost } from "../../../redux/postsSlice";
+// import { createPost } from "../../../redux/postsSlice";
+import { addNewPost } from "../../../redux/postsSliceActions";
 import { users } from "../../../redux/usersSlice";
 
 const CreatePosts = () => {

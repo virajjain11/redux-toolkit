@@ -1,11 +1,7 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  allPosts,
-  fetchPosts,
-  postStatus,
-  error,
-} from "../../redux/postsSlice";
+import { allPosts, postStatus, error } from "../../redux/postsSlice";
+import { fetchPosts } from "../../redux/postsSliceActions";
 import AllPosts from "./AllPosts/AllPosts";
 import CreatePosts from "./createPosts/CreatePosts";
 
