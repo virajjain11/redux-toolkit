@@ -72,7 +72,7 @@ const postSlice = createSlice({
       .addCase(addNewPost.fulfilled, (state, action) => {
         // console.log("posss", action.payload);
         action.payload.userId = +action.payload.userId;
-        action.payload.data = new Date().toISOString();
+        action.payload.date = new Date().toISOString();
         action.payload.reactions = initialReactionsState;
         state.posts.push(action.payload);
       });
