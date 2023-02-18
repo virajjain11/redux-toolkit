@@ -13,22 +13,7 @@ const initialReactionsState = {
   rocket: 0,
   coffee: 0,
 };
-// const initialState = [
-//   {
-//     id: "1",
-//     title: "Learning Redux Toolkit",
-//     content: "I've heard good things.",
-//     date: sub(new Date(), { minutes: 10 }).toISOString(),
-//     reactions: initialReactionsState,
-//   },
-//   {
-//     id: "2",
-//     title: "Slices...",
-//     content: "The more I say slice, the more I want pizza.",
-//     date: sub(new Date(), { minutes: 5 }).toISOString(),
-//     reactions: initialReactionsState,
-//   },
-// ];
+
 const initialState = {
   posts: [],
   status: "idle",
@@ -42,6 +27,12 @@ export const fetchPosts = createAsyncThunk("posts/fetchPosts", async () => {
     .then((res) => res.data)
     .catch((err) => err.response);
 });
+export const addNewPost = createAsyncThunk("posts/addNewPost", async (post) => {
+  return axios
+    .post(POST_URI, post)
+    .then((res) => res.data)
+    .catch((err) => err.message);
+});
 
 const postSlice = createSlice({
   name: "posts",
@@ -49,9 +40,9 @@ const postSlice = createSlice({
   reducers: {
     createPost: {
       reducer: (state, action) => {
-        console.log("first", current(state));
+        // console.log("first", current(state));
         state.posts.push(action.payload);
-        console.log("second", current(state));
+        // console.log("second", current(state));
       },
       prepare: ({ title, content, userId }) => {
         return {
@@ -82,7 +73,7 @@ const postSlice = createSlice({
         state.status = "loading";
       })
       .addCase(fetchPosts.fulfilled, (state, action) => {
-        console.log("ddddddd", action);
+        // console.log("ddddddd", action);
         state.status = "success";
         let min = 1;
         const modifiedPosts = action.payload.map((post) => {
@@ -96,6 +87,13 @@ const postSlice = createSlice({
       .addCase(fetchPosts.rejected, (state, action) => {
         state.status = "failed";
         state.error = action.error.message;
+      })
+      .addCase(addNewPost.fulfilled, (state, action) => {
+        // console.log("posss", action.payload);
+        action.payload.userId = +action.payload.userId;
+        action.payload.data = new Date().toISOString();
+        action.payload.reactions = initialReactionsState;
+        state.posts.push(action.payload);
       });
   },
 });
