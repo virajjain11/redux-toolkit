@@ -1,4 +1,8 @@
-import { createSlice, current, nanoid } from "@reduxjs/toolkit";
+import {
+  createSlice,
+  //  current,
+  nanoid,
+} from "@reduxjs/toolkit";
 import { sub } from "date-fns";
 import { addNewPost, fetchPosts } from "./postsSliceActions";
 const initialReactionsState = {

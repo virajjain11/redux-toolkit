@@ -1,11 +1,11 @@
-import { nanoid } from "@reduxjs/toolkit";
+// import { nanoid } from "@reduxjs/toolkit";
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 // import { createPost } from "../../../redux/postsSlice";
 import { addNewPost } from "../../../redux/postsSliceActions";
 import { users } from "../../../redux/usersSlice";
 
-const CreatePosts = () => {
+const CreatePost = () => {
   const dispatch = useDispatch();
 
   const [title, setTitle] = useState("");
@@ -76,4 +76,4 @@ const CreatePosts = () => {
   );
 };
 
-export default CreatePosts;
+export default CreatePost;

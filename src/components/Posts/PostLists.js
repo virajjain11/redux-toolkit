@@ -13,7 +13,7 @@ const PostLists = () => {
 
   useEffect(() => {
     if (status === "idle") dispatch(fetchPosts());
-  }, [status]);
+  }, [status, dispatch]);
 
   let content;
   if (status === "loading") content = <p>Loading...</p>;
