@@ -83,4 +83,7 @@ export const { createPost, addReactions } = postSlice.actions;
 export const allPosts = (state) => state.posts.posts;
 export const postStatus = (state) => state.posts.status;
 export const error = (state) => state.posts.error;
+export const postById = (state, postId) =>
+  state.posts.posts.find((post) => post.id === postId);
+
 export default postSlice.reducer;
