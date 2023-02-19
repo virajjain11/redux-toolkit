@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { allPosts, postStatus, error } from "../../redux/postsSlice";
 import { fetchPosts } from "../../redux/postsSliceActions";
 import AllPosts from "./AllPosts/AllPosts";
-import CreatePosts from "./createPosts/CreatePosts";
 
 const PostLists = () => {
   const dispatch = useDispatch();
@@ -27,13 +26,7 @@ const PostLists = () => {
       <AllPosts post={post} key={post.id} />
     ));
   }
-  return (
-    <section>
-      <h3>Posts</h3>
-      <CreatePosts />
-      {content}
-    </section>
-  );
+  return <section>{content}</section>;
 };
 
 export default PostLists;
