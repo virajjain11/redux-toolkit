@@ -12,7 +12,6 @@ function App() {
     <Routes>
       <Route path="/" element={<Layout />}>
         <Route index element={<PostLists />} />
-
         <Route path="post">
           <Route index element={<CreatePost />} />
           <Route path=":postId" element={<IndividualPost />} />
