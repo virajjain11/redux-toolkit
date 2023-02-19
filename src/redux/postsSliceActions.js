@@ -14,3 +14,11 @@ export const addNewPost = createAsyncThunk("posts/addNewPost", async (post) => {
     .then((res) => res.data)
     .catch((err) => err.message);
 });
+
+export const updatePost = createAsyncThunk("posts/updatePost", async (post) => {
+  const { id } = post;
+  return axios
+    .put(`${POST_URI}/${id}`, post)
+    .then((res) => res.data)
+    .catch((err) => err.message);
+});
