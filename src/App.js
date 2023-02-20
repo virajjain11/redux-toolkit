@@ -6,6 +6,7 @@ import { Route, Routes } from "react-router-dom";
 import Layout from "./components/UI/Layout";
 import IndividualPost from "./components/Posts/IndividualPostDetails/IndividualPost";
 import CreatePost from "./components/Posts/Forms/CreatePost";
+import EditPost from "./components/Posts/Forms/EditPost";
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
         <Route path="post">
           <Route index element={<CreatePost />} />
           <Route path=":postId" element={<IndividualPost />} />
+          <Route path="edit/:postId" element={<EditPost />} />
         </Route>
       </Route>
     </Routes>

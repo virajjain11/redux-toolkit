@@ -24,13 +24,6 @@ export const updatePost = createAsyncThunk("posts/updatePost", async (post) => {
     .catch((err) => err.message);
 });
 
-// export const addNewPostReducer = (state, action) => {
-//   console.log("hereee", action.payload);
-//   action.payload.userId = +action.payload.userId;
-//   action.payload.date = new Date().toISOString();
-//   action.payload.reactions = initialReactionsState;
-//   state.posts.push(action.payload);
-// };
 export const updatePostReducer = (state, action) => {
   if (!action.payload?.id) {
     console.log("Update could not complete");

@@ -4,7 +4,12 @@ import {
   nanoid,
 } from "@reduxjs/toolkit";
 import { sub } from "date-fns";
-import { addNewPost, fetchPosts } from "./postsSliceActions";
+import {
+  addNewPost,
+  fetchPosts,
+  updatePost,
+  updatePostReducer,
+} from "./postsSliceActions";
 const initialReactionsState = {
   thumbsUp: 0,
   wow: 0,
@@ -79,7 +84,8 @@ const postSlice = createSlice({
         action.payload.date = new Date().toISOString();
         action.payload.reactions = initialReactionsState;
         state.posts.push(action.payload);
-      });
+      })
+      .addCase(updatePost.fulfilled, updatePostReducer);
   },
 });
 
