@@ -35,3 +35,25 @@ export const updatePostReducer = (state, action) => {
   const posts = state.posts.filter((post) => post.id !== id);
   state.posts = [...posts, action.payload];
 };
+export const deletePost = createAsyncThunk("posts/deletePost", async (post) => {
+  return axios
+    .delete(`${POST_URI}/${post.id}`)
+    .then((res) => {
+      console.log("dddddd", res?.status, res);
+      return res?.status === 200 ? post : `${res.status}: ${res.statusText}`;
+    })
+    .catch((err) => err.message);
+});
+
+export const deletePostReducer = (state, action) => {
+  if (!action.payload?.id) {
+    console.log("Delete could not complete");
+    console.log(action.payload);
+    return;
+  }
+
+  const { id } = action.payload;
+  action.payload.date = new Date().toISOString();
+  const posts = state.posts.filter((post) => post.id !== id);
+  state.posts = posts;
+};

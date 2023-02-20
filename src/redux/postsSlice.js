@@ -6,6 +6,8 @@ import {
 import { sub } from "date-fns";
 import {
   addNewPost,
+  deletePost,
+  deletePostReducer,
   fetchPosts,
   updatePost,
   updatePostReducer,
@@ -85,7 +87,8 @@ const postSlice = createSlice({
         action.payload.reactions = initialReactionsState;
         state.posts.push(action.payload);
       })
-      .addCase(updatePost.fulfilled, updatePostReducer);
+      .addCase(updatePost.fulfilled, updatePostReducer)
+      .addCase(deletePost.fulfilled, deletePostReducer);
   },
 });
 
